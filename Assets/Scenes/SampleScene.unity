@@ -416,6 +416,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae0209ed4df6de748a97e44519660e07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LeftAction:
+    m_Name: Left
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: a56fd8a0-c4b1-4af2-8382-bc2ceb8b9331
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 6ba54bcf-7658-459b-a010-9f512c45690d
+      m_Path: <Keyboard>/leftArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Left
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 01c4a876-4887-4d36-992c-4bb76b1bac49
+      m_Path: <Keyboard>/rightArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Left
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 41f37d74-c3e9-4e02-9980-cfe0ced281b4
+      m_Path: <Keyboard>/downArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Left
+      m_Flags: 0
+    - m_Name: 
+      m_Id: f4714bb9-9af0-4663-b057-a2d5581f7cbb
+      m_Path: <Keyboard>/upArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Left
+      m_Flags: 0
+    m_Flags: 0
 --- !u!212 &1301190594
 SpriteRenderer:
   m_ObjectHideFlags: 0
