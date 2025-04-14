@@ -1,16 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+
 public class PlayerController : MonoBehaviour
 {
-    public InputAction MoveAction;
-
-    void Start()
-    {
-        MoveAction.Enable(); // Habilita a ação de movimento ao iniciar
-      
-    }
-
     void Update()
     {
         float horizontal = 0.0f;
@@ -44,3 +40,6 @@ public class PlayerController : MonoBehaviour
         transform.position = position;
     }
 }
+
+
+
