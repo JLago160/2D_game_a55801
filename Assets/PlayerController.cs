@@ -5,8 +5,14 @@ using UnityEngine.InputSystem;
 
 
 
+
+
+ 
+
 public class PlayerController : MonoBehaviour
 {
+    public float speed = 3.0f;
+
     void Update()
     {
         float horizontal = 0.0f;
@@ -32,14 +38,17 @@ public class PlayerController : MonoBehaviour
             vertical = -1.0f;
         }
 
+        // Debug
         Debug.Log($"Horizontal: {horizontal}, Vertical: {vertical}");
 
+        // Movimento
         Vector2 position = transform.position;
-        position.x += 0.1f * horizontal;
-        position.y += 0.1f * vertical;
+        position.x += speed * Time.deltaTime * horizontal;
+        position.y += speed * Time.deltaTime * vertical;
         transform.position = position;
     }
 }
+
 
 
 
