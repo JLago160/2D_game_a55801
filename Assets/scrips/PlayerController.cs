@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+
+        // Atualiza a barra de vida no começo
+        UIHandler1.instance.SetHealthValue(currentHealth / (float)maxHealth);
     }
 
     void Update()
@@ -70,4 +73,5 @@ public class PlayerController : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         Debug.Log($"Vida: {currentHealth}/{maxHealth}");
     }
+
 }
