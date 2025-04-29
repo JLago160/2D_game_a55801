@@ -3,60 +3,62 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class PlayerController : MonoBehaviour
 {
-    // Movimento
+    // Variables related to player character movement
+    public InputAction MoveAction;
+    Rigidbody2D rigidbody2d;
+    Vector2 move;
     public float speed = 3.0f;
 
-    // Vida
+
+    // Variables related to the health system
     public int maxHealth = 5;
-    private int currentHealth;
+    int currentHealth;
     public int health { get { return currentHealth; } }
 
-    // Invencibilidade
-    public float timeInvincible = 2.0f;
-    private bool isInvincible;
-    private float damageCooldown;
 
+    // Variables related to temporary invincibility
+    public float timeInvincible = 2.0f;
+    bool isInvincible;
+    float damageCooldown;
+
+
+    // Start is called before the first frame update
     void Start()
     {
-        currentHealth = maxHealth;
+        MoveAction.Enable();
+        rigidbody2d = GetComponent<Rigidbody2D>();
 
-        // Atualiza a barra de vida no começo
-        UIHandler1.instance.SetHealthValue(currentHealth / (float)maxHealth);
+
+        currentHealth = maxHealth;
     }
 
+    // Update is called once per frame
     void Update()
     {
-        // Movimento
-        float horizontal = 0.0f;
-        float vertical = 0.0f;
+        move = MoveAction.ReadValue<Vector2>();
 
-        if (Keyboard.current.leftArrowKey.isPressed)
-            horizontal = -1.0f;
-        else if (Keyboard.current.rightArrowKey.isPressed)
-            horizontal = 1.0f;
 
-        if (Keyboard.current.upArrowKey.isPressed)
-            vertical = 1.0f;
-        else if (Keyboard.current.downArrowKey.isPressed)
-            vertical = -1.0f;
-
-        Vector2 position = transform.position;
-        position.x += speed * Time.deltaTime * horizontal;
-        position.y += speed * Time.deltaTime * vertical;
-        transform.position = position;
-
-        // Invencibilidade
         if (isInvincible)
         {
             damageCooldown -= Time.deltaTime;
-            if (damageCooldown <= 0)
+            if (damageCooldown < 0)
             {
                 isInvincible = false;
             }
         }
     }
+
+
+    // FixedUpdate has the same call rate as the physics system
+    void FixedUpdate()
+    {
+        Vector2 position = (Vector2)rigidbody2d.position + move * speed * Time.deltaTime;
+        rigidbody2d.MovePosition(position);
+    }
+
 
     public void ChangeHealth(int amount)
     {
@@ -70,8 +72,10 @@ public class PlayerController : MonoBehaviour
             damageCooldown = timeInvincible;
         }
 
+
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-        Debug.Log($"Vida: {currentHealth}/{maxHealth}");
+        Debug.Log(currentHealth + "/" + maxHealth);
     }
+
 
 }
