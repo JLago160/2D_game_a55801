@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 /// <summary>
 /// This class handle Enemy behaviour. It make them walk back & forth as long as they aren't fixed, and then just idle
@@ -51,11 +52,11 @@ public class Enemy : MonoBehaviour
 		if (remainingTimeToChange <= 0)
 		{
 			remainingTimeToChange += timeToChange;
-			direction *= -1;
+            direction *= -1;
 		}
-
-		animator.SetFloat("ForwardX", direction.x);
-		animator.SetFloat("ForwardY", direction.y);
+    
+        animator.SetFloat("Move X", direction.x);
+		animator.SetFloat("Move Y", direction.y);
 	}
 
 	void FixedUpdate()

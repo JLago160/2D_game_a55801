@@ -53,4 +53,9 @@ public class UIHandler : MonoBehaviour
     {
         m_Healthbar.style.width = Length.Percent(100 * percentage);
     }
+
+    internal void DisplayDialogue()
+    {
+        throw new NotImplementedException();
+    }
 }
