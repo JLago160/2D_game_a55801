@@ -57,8 +57,8 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        animator.SetFloat("Look X", moveDirection.x);
-        animator.SetFloat("Look Y", moveDirection.y);
+        animator.SetFloat("X", moveDirection.x);
+        animator.SetFloat("Y", moveDirection.y);
         animator.SetFloat("Speed", move.magnitude);
 
 
