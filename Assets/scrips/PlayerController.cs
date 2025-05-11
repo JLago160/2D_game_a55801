@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public InputAction MoveAction;
     Rigidbody2D rigidbody2d;
     Vector2 move;
-    public float speed = 3.0f;
+    public float speed = 4.0f;
 
     // Variables related to the health system
     public int maxHealth = 5;
@@ -26,8 +26,12 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     Vector2 moveDirection = new Vector2(1, 0);
 
-    // // Variables related to Projectile
+    // Variables related to Projectile
     public GameObject projectilePrefab;
+
+    // Variables related to audio
+    AudioSource audioSource;
+
 
 
     // Start is called before the first frame update
@@ -37,6 +41,7 @@ public class PlayerController : MonoBehaviour
         rigidbody2d = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -67,12 +72,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
         if (Input.GetKeyDown(KeyCode.C))
         {
             Launch();
         }
-
 
         if (Input.GetKeyDown(KeyCode.X))
         {
@@ -81,15 +84,12 @@ public class PlayerController : MonoBehaviour
     }
 
 
-
-
     // FixedUpdate has the same call rate as the physics system 
     void FixedUpdate()
     {
         Vector2 position = (Vector2)rigidbody2d.position + move * speed * Time.deltaTime;
         rigidbody2d.MovePosition(position);
     }
-
 
 
     public void ChangeHealth(int amount)
@@ -105,8 +105,9 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("Hit");
         }
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-        UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
+        UIHandler1.instance.SetHealthValue(currentHealth / (float)maxHealth);
     }
+
 
 
     void Launch()
@@ -118,20 +119,25 @@ public class PlayerController : MonoBehaviour
     }
 
 
+
     void FindFriend()
     {
         RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, moveDirection, 1.5f, LayerMask.GetMask("NPC"));
         if (hit.collider != null)
         {
-            NonPlayerCharacter character = hit.collider.GetComponent<NonPlayerCharacter>();
+            NonPlayerCharacter1 character = hit.collider.GetComponent<NonPlayerCharacter1>();
             if (character != null)
             {
-                UIHandler.instance.DisplayDialogue();
+                UIHandler1.instance.DisplayDialogue();
             }
         }
     }
 
 
-}
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
+    }
 
+}
 
