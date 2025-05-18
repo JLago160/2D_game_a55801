@@ -5,8 +5,7 @@ using UnityEngine;
 public class Projectile1 : MonoBehaviour
 {
     Rigidbody2D rigidbody2d;
-
-
+   
     // Awake is called when the Projectile GameObject is instantiated
     void Awake()
     {
